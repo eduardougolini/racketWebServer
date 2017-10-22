@@ -28,23 +28,23 @@
 (query-exec mydb
              "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual a principal característica do cálculo lambda?', 'As entidades podem ser utilizadas como argumentos e retornadas como valores de outras funções');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '2', '2');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'A programação funcional é adequada em quais cenários?', 'Computações matemáticas, inteligência artificial e processamento paralelo');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '3', '3');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual foi a primeira linguagem de programação a implementar o paradigma funcional?', 'Lisp');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '4', '4');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual o nome da IDE oficial da linguagem racket?', 'DrRacket');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '5', '5');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'No paradigma funcional se um valor qualquer aparece num momento qualquer da computação, considera-se que ele é um valor ....... e ....... durante todo o processo', 'único e imutável');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '6', '6');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'O paradigma funcional é baseado em funções ........', 'matemáticas');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '7', '7');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Quais foram as duas linguagens de programação que influenciaram o racket?', 'Scheme e Eiffel');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '8', '8');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Quais são os tipos de tipagem suportados pelo racket?', 'Dinâmica, forte e estática');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '9', '9');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'O racket é uma linguagem que tem seus principais usos na área acadêmica e na criação de .......', 'linguagens embutidas');")
 (query-exec mydb
-             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '10', '10');")
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual a diretiva utilizada para modificar a linguagem interpretada pelo Racket?', '#lang');")
 
 
 (define questions
