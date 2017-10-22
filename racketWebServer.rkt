@@ -16,6 +16,37 @@
   )
 )
 
+(query-exec mydb
+            "CREATE TABLE IF NOT EXISTS `racket`.`pergunta` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `pergunta` VARCHAR(20000) NOT NULL,
+  `resposta` VARCHAR(20000) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))")
+
+(query-exec mydb
+            "TRUNCATE TABLE `racket`.`pergunta`;")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual a principal característica do cálculo lambda?', 'As entidades podem ser utilizadas como argumentos e retornadas como valores de outras funções');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '2', '2');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '3', '3');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '4', '4');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '5', '5');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '6', '6');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '7', '7');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '8', '8');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '9', '9');")
+(query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, '10', '10');")
+
+
 (define questions
   (in-query mydb
               "SELECT pergunta.pergunta FROM pergunta"
