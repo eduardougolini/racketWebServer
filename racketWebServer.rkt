@@ -4,6 +4,7 @@
          racket/sequence
          racket/list
          web-server/servlet
+         web-server/dispatch
          web-server/servlet-env)
 
 (define mydb
@@ -21,13 +22,21 @@
   )
 )
 
+(define-values (trabalho-dispatch a-url)
+  (dispatch-rules [("validate") validateFunc]
+                  [("index") mainScreen])
+)
+
+(define (start request)
+  (trabalho-dispatch request)
+)
 
 (define (mainScreen req)
   (response/xexpr
    `(html
      (head (title "Trabalho 1!"))
      (body ([style "background-color: #ccc;"])
-                   (form ([action "/validate"])
+                   (form ([method "get"] [action "/validate"])
                          
                          (p "1: ", (first (sequence->list questions)))
                          (br)
@@ -75,13 +84,45 @@
   )
 )
 
-(serve/servlet mainScreen
-               #:servlet-path "/"
-               #:port 8080)
 
-(serve/servlet mainScreen
-               #:servlet-path "/validate"
-               #:port 8080)
+(define (validateFunc req)
+  (define firstAnswer (get-param->string req "1"))
+  (define secondAnswer (get-param->string req "2"))
+  (define thirdAnswer (get-param->string req "3"))
+  (define fourthAnswer (get-param->string req "4"))
+  (define fifthAnswer (get-param->string req "5"))
+  (define sixthAnswer (get-param->string req "6"))
+  (define seventhAnswer (get-param->string req "7"))
+  (define eighthAnswer (get-param->string req "8"))
+  (define ninthAnswer (get-param->string req "9"))
+  (define tenthAnswer (get-param->string req "10"))
+
+  (response/xexpr
+   `(html
+      (head (title "Trabalho 1!"))
+      (body ([style "background-color: #ccc;"])
+        (p "resutado: ", result)
+        (br)
+      )
+    )
+   )
+)
+
+(define (get-param->string req param)
+    (if (eq? #f (bindings-assq (string->bytes/utf-8 param)
+                               (request-bindings/raw req)))
+        ""
+        (bytes->string/utf-8 
+           (binding:form-value 
+               (bindings-assq (string->bytes/utf-8 param)
+                              (request-bindings/raw req))))))
+
+
+(serve/servlet start
+               #:servlet-path "/index"
+               #:port 8080
+               #:servlet-regexp #rx""
+)
 
 
   
