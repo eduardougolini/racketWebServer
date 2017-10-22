@@ -22,6 +22,13 @@
   )
 )
 
+(define answers
+  (in-query mydb
+              "SELECT pergunta.resposta FROM pergunta"
+  )
+)
+
+
 (define-values (trabalho-dispatch a-url)
   (dispatch-rules [("validate") validateFunc]
                   [("index") mainScreen])
@@ -97,11 +104,40 @@
   (define ninthAnswer (get-param->string req "9"))
   (define tenthAnswer (get-param->string req "10"))
 
+  (define correctFirstAnswer (first (sequence->list answers)))
+  (define correctSecondAnswer (second (sequence->list answers)))
+  (define correctThirdAnswer (third (sequence->list answers)))
+  (define correctFourthAnswer (fourth (sequence->list answers)))
+  (define correctFifthAnswer (fifth (sequence->list answers)))
+  (define correctSixthAnswer (sixth (sequence->list answers)))
+  (define correctSeventhAnswer (seventh (sequence->list answers)))
+  (define correctEighthAnswer (eighth (sequence->list answers)))
+  (define correctNinthAnswer (ninth (sequence->list answers)))
+  (define correctTenthAnswer (tenth (sequence->list answers)))
+
   (response/xexpr
    `(html
       (head (title "Trabalho 1!"))
       (body ([style "background-color: #ccc;"])
-        (p "resutado: ", result)
+        (p "1: Sua resposta: "(b, firstAnswer) " | Reposta correta: "(b, correctFirstAnswer))
+        (br)
+        (p "2: Sua resposta: "(b, secondAnswer) " | Reposta correta: "(b, correctSecondAnswer))
+        (br)
+        (p "3: Sua resposta: "(b, thirdAnswer) " | Reposta correta: "(b, correctThirdAnswer))
+        (br)
+        (p "4: Sua resposta: "(b, fourthAnswer) " | Reposta correta: "(b, correctFourthAnswer))
+        (br)
+        (p "5: Sua resposta: "(b, fifthAnswer) " | Reposta correta: "(b, correctFifthAnswer))
+        (br)
+        (p "6: Sua resposta: "(b, sixthAnswer) " | Reposta correta: "(b, correctSixthAnswer))
+        (br)
+        (p "7: Sua resposta: "(b, seventhAnswer) " | Reposta correta: "(b, correctSeventhAnswer))
+        (br)
+        (p "8: Sua resposta: "(b, eighthAnswer) " | Reposta correta: "(b, correctEighthAnswer))
+        (br)
+        (p "9: Sua resposta: "(b, ninthAnswer) " | Reposta correta: "(b, correctNinthAnswer))
+        (br)
+        (p "10: Sua resposta: "(b, tenthAnswer) " | Reposta correta: "(b, correctTenthAnswer))
         (br)
       )
     )
