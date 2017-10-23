@@ -46,30 +46,184 @@
 (query-exec mydb
              "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, 'Qual a diretiva utilizada para modificar a linguagem interpretada pelo Racket?', '#lang');")
 
-
-(define questions
-  (in-query mydb
-              "SELECT pergunta.pergunta FROM pergunta"
-  )
-)
-
-(define answers
-  (in-query mydb
-              "SELECT pergunta.resposta FROM pergunta"
-  )
-)
-
-
 (define-values (trabalho-dispatch a-url)
   (dispatch-rules [("validate") validateFunc]
-                  [("index") mainScreen])
+                  [("questions") mainScreen]
+                  [("addQuestions") addQuestions]
+                  [("newQuestions") newQuestionsScreen]
+                  [("index") selectionScreen])
 )
 
 (define (start request)
   (trabalho-dispatch request)
 )
 
+(define (selectionScreen req)
+  (response/xexpr
+    `(html
+       (head (title "Trabalho 1!"))
+       (body ([style "background-color: #ccc;"])
+         (div
+           (div ([style "text-align: center; margin: auto; margin-top: 20%;"])
+             (a ([href "/questions"]) "Usar perguntas do sistema")
+             (br)
+             (a ([href "/newQuestions"]) "Cadastrar minhas perguntas")
+           )
+         )
+       )
+     )
+   )
+)
+
+(define (addQuestions req)
+  (define firstQuestion (get-param->string req "p1"))
+  (define secondQuestion (get-param->string req "p2"))
+  (define thirdQuestion (get-param->string req "p3"))
+  (define fourthQuestion (get-param->string req "p4"))
+  (define fifthQuestion (get-param->string req "p5"))
+  (define sixthQuestion (get-param->string req "p6"))
+  (define seventhQuestion (get-param->string req "p7"))
+  (define eighthQuestion (get-param->string req "p8"))
+  (define ninthQuestion (get-param->string req "p9"))
+  (define tenthQuestion (get-param->string req "p10"))
+
+  (define firstAnswer (get-param->string req "r1"))
+  (define secondAnswer (get-param->string req "r2"))
+  (define thirdAnswer (get-param->string req "r3"))
+  (define fourthAnswer (get-param->string req "r4"))
+  (define fifthAnswer (get-param->string req "r5"))
+  (define sixthAnswer (get-param->string req "r6"))
+  (define seventhAnswer (get-param->string req "r7"))
+  (define eighthAnswer (get-param->string req "r8"))
+  (define ninthAnswer (get-param->string req "r9"))
+  (define tenthAnswer (get-param->string req "r10"))
+
+  (query-exec mydb
+            "TRUNCATE TABLE `racket`.`pergunta`;")
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             firstQuestion
+             firstAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             secondQuestion
+             secondAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             thirdQuestion
+             thirdAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             fourthQuestion
+             fourthAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             fifthQuestion
+             fifthAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             sixthQuestion
+             sixthAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             seventhQuestion
+             seventhAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             eighthQuestion
+             eighthAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             ninthQuestion
+             ninthAnswer)
+  (query-exec mydb
+             "INSERT INTO `pergunta` (`id`, `pergunta`, `resposta`) VALUES (NULL, ?, ?);"
+             tenthQuestion
+             tenthAnswer)
+
+  (redirect-to "/questions" permanently)
+)
+
+(define (newQuestionsScreen req)
+  (response/xexpr
+   `(html
+     (head (title "Trabalho 1!"))
+     (body ([style "background-color: #ccc;"])
+                   (form ([method "get"] [action "/addQuestions"])
+                         "Pergunta 1"
+                         (input ([type "text"] [name "p1"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 1"
+                         (input ([type "text"] [name "r1"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 2"
+                         (input ([type "text"] [name "p2"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 2"
+                         (input ([type "text"] [name "r2"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 3"
+                         (input ([type "text"] [name "p3"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 3"
+                         (input ([type "text"] [name "r3"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 4"
+                         (input ([type "text"] [name "p4"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 4"
+                         (input ([type "text"] [name "r4"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 5"
+                         (input ([type "text"] [name "p5"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 5"
+                         (input ([type "text"] [name "r5"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 6"
+                         (input ([type "text"] [name "p6"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 6"
+                         (input ([type "text"] [name "r6"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 7"
+                         (input ([type "text"] [name "p7"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 7"
+                         (input ([type "text"] [name "r7"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 8"
+                         (input ([type "text"] [name "p8"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 8"
+                         (input ([type "text"] [name "r8"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 9"
+                         (input ([type "text"] [name "p9"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 9"
+                         (input ([type "text"] [name "r9"] [value ""] [required "true"]))
+                         (br)
+                         "Pergunta 10"
+                         (input ([type "text"] [name "p10"] [value ""] [required "true"]))
+                         (br)
+                         "Resposta 10"
+                         (input ([type "text"] [name "r10"] [value ""] [required "true"]))
+                         (br)
+
+                         (input ([type "submit"] [name "enter"] [value "Enviar"]))
+                    )
+     )
+   )
+  )
+)
+
 (define (mainScreen req)
+  (define questions
+    (in-query mydb
+              "SELECT pergunta.pergunta FROM pergunta")
+  )
+  
   (response/xexpr
    `(html
      (head (title "Trabalho 1!"))
@@ -123,6 +277,11 @@
 
 
 (define (validateFunc req)
+  (define answers
+    (in-query mydb
+              "SELECT pergunta.resposta FROM pergunta")
+  )
+  
   (define firstAnswer (get-param->string req "1"))
   (define secondAnswer (get-param->string req "2"))
   (define thirdAnswer (get-param->string req "3"))
